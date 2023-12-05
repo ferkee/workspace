@@ -1,0 +1,7 @@
+#!/bin/bash
+grep='grep --color=auto'
+
+DIR=/cygdrive/c/Boxworks/BoxWorksWCS/BoxWorksWcsSvc
+$grep -n -H $2 $1 $DIR/*.{cs}
+$grep -n -H $2 $1 $DIR/Properties/*.{cs}
+$grep -n -H $2 $1 $DIR/Event/*.{cs}

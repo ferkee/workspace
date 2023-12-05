@@ -1,0 +1,625 @@
+#***********************************************************
+# .aliases (johnf)
+#***********************************************************
+alias alais=alias
+
+# Re-load aliases
+alias real='. ~/.aliases'
+# View (vi) then Re-load aliases
+alias vial='vi ~/.aliases; real;'
+
+SYS_DIR=$SYSDIR
+SYS_LOG=/log$SYS_DIR
+
+hhagerco=10.10.3.87
+hmgm1=10.20.3.21
+hmgm2=10.20.3.22
+hmgm0=10.20.3.20
+
+#
+# Command Overrides
+#
+alias grep='/bin/grep --color '
+alias egrep='/bin/egrep --color '
+alias diff='~/bin/colordiff'
+alias vi='/bin/vim'
+
+
+alias bkspc='stty erase ^?'
+
+
+alias cpan='perl -MCPAN -e shell;'
+alias tns='more ${ORACLE_HOME}/network/admin/tnsnames.ora'
+
+#
+# ls Aliases
+#
+alias  lt='ls -lAtp'
+alias lts='lt -Sr'   # Sort by size
+alias  lh='ls -lAt --color=always| head -20' # 20 Most Recent 
+alias  lm='lt | more'
+alias   l='ls -alCFs'
+alias  la='ls -lAt'
+alias lha='la | head'
+alias dir='ls -lAtp --color | grep ^d'
+alias lnk='ls -lAt | grep ^l'
+
+#
+# Command Aliases - including Mistakes
+#
+alias    m='more '
+alias cd..='cd ..'
+alias   dc='cd'
+alias grpe='grep'
+alias   iv='vi'
+
+#
+# Odd, Useful
+#
+alias myrgb='tail -40 ~jfierke/misc/my_rgb.txt'
+alias man2='info coreutils "$1 invocation"'
+
+# jwf : 10/17/2019 alias hh='/usr/bin/fc -l'
+# jwf : 10/17/2019 alias  r='/usr/bin/fc -s'
+alias fnd='find . -name'
+alias new='tput init'
+alias wi='w | head -2; w | grep -v ^USER | grep -v "^ " |sort -n -k 5'
+alias w2='date; w | grep -vE "^(wms|hager)"|sort'
+alias w3='w2 | grep -v johnf' 
+alias who2='who | grep -v ^wms | grep -v johnf'
+alias notme='w2 | grep -v johnf'
+#alias df='df -k'
+#alias crit='df -k | head -1; df -k | sort +4 -nr | head -2'
+alias last='last -60 | grep -vE "($USER|wms|hager)"'
+alias last2='last -100 | grep "`date | cut -c1-10`"; last -100 | grep "still logged in"'
+#alias latest='last -10'
+#alias newest='find $SYS_DIR -type f -newer $SYS_DIR/newest.txt ! \( -name "*.arc" -o -name "*.rpt" -o -name "????" -o -name "*.o" -o -name "*.exe*" -o -name "*.log*" \) -exec ls -ldt {} \; | grep -v obj | grep -v brx | grep -v "arc$" | grep -v "rpt$" | grep -v CVS | grep -v hircv | grep -v hisnd | grep -v "lis$" | grep -v "\~$" | grep -v "\.pid$"'
+alias not_asrs_app='find . ! -user asrs_dev -exec ls -ldt {} \;'
+
+# SHOWS SPECIAL CHARACTERS !!!!!
+alias cat2='cat -v -t'  # TAB = '$I'
+alias cat3='od -c '  # displays character-by-character
+alias cat4='cat -v -e'  # EOL = '$'
+
+
+#
+# Coding-Related
+#
+# Search for where a function is DEFINED
+# SEE /box/ut/shs/fngrep # alias fngrep='function _fngrep() { sg2 $1 | egrep ":(int |Function Name: )$1"; }; _fngrep'
+# View file in which it is DEFINED
+# SEE /box/ut/shs/seefunc #  alias seefunc='function _seefunc() { str=$(fngrep $1 | grep int); fname=$(echo $str | cut -f1 -d ":"); lnum=$(echo $str | cut -f2 -d ":"); emacsclient -n -nw +${lnum} ${fname}; }; _seefunc'
+# - With vi
+# SEE /box/ut/shs/seefunc # alias seefuncv='function _seefuncv() { str=$(fngrep $1 | grep int); fname=$(echo $str | cut -f1 -d ":"); lnUm=$(echo $str | cut -f2 -d ":"); /bin/view +${lnum} ${fname}; }; _seefuncv'
+
+#
+# Navigation
+#
+alias countsas='who | grep sas | cut -f2 -d "(" | cut -f1 -d ")" | sort | uniq -c | sort; who | grep sas | wc -l'
+
+alias mysql='cd ~/sql'
+alias sql=mysql
+alias mysrc='cd ~/src' 
+alias mydat='cd ~/dat'
+# jwf : 10/17/2019 alias \!='/usr/bin/fc -s - '
+alias h='echo; echo "   whoami"; echo "   ------"; echo "   `whoami`"; echo; echo "   hostname    uname -a"; echo "   ---------   --------"; echo "   `hostname`   `uname -a`"; echo'
+
+
+alias apache='cd $SYS_USERS/apache2'
+alias apache_mods='$SYS_USERS/apache2/bin/httpd -l'
+
+# Make gdb/Debug easier
+# #alias dodbg="cfile=core.36660; gdb $(file $cfile  | egrep -o '/box/../obj/........' | head -1) $cfile"
+alias dodbg='function _cfile { cfile=$1; echo $cfile; gdb $(file $cfile | egrep -o "/box/../obj/........" | head -1) $cfile; }; _cfile'
+ 
+
+
+#
+# bw www directories
+#
+alias www='cd /www'
+alias wbox='cd /www/$SYSDIR'
+alias wadm='cd /www/$SYS_DIR/admin'
+alias wasrs='cd /www/$SYS_DIR/asrs'
+alias  wbw='cd /www/$SYS_DIR/bw'
+alias wcom='cd /www/$SYS_DIR/common'
+alias wcfg='cd /www/$SYS_DIR/config'
+alias wcom='cd /www/$SYS_DIR/common'
+alias wdbe='cd /www/$SYS_DIR/dbe'
+alias wexl='cd /www/$SYS_DIR/excel'
+alias whlp='cd /www/$SYS_DIR/hlp'
+alias whks='cd /www/$SYS_DIR/hooks'
+alias winv='cd /www/$SYS_DIR/inv'
+alias  wjs='cd /www/$SYS_DIR/js'
+alias wmnt='cd /www/$SYS_DIR/maint'
+alias wmen='cd /www/$SYS_DIR/menu'
+alias wmnt='cd /www/$SYS_DIR/maint'
+alias word='cd /www/$SYS_DIR/orders'
+alias wphp='cd /www/$SYS_DIR/php'
+alias wrcv='cd /www/$SYS_DIR/rcv'
+alias wrpt='cd /www/$SYS_DIR/reports'
+alias wscr='cd /www/$SYS_DIR/scripts'
+alias wshp='cd /www/$SYS_DIR/shp'
+alias wsql='cd /www/$SYS_DIR/sql'
+alias wtls='cd /www/$SYS_DIR/tools'
+alias wdat='cd /www/$SYS_DIR/dat'
+
+#
+# Commonly needed files
+#
+alias vigv='vi /www/box/common/global_vars.php'
+
+alias vhst='/home/johnf/bin/bwsql /home/johnf/sql/vhst.sql'
+alias hager_new='/home/johnf/bin/g2sql /home/johnf/sql/list_hager_new.sql'
+alias last_g2='glog update_ hi | tail'
+
+alias weblog='cd /etc/httpd/logs' 
+alias weberr='weblog; tail -20 error_log'
+alias weberrt='weblog; tail -20f error_log;'
+
+
+alias ora='cd $ORACLE_HOME; ls -lat | grep ^d'
+#
+# Useful Aliases for ASRS
+#
+tail_len=50
+alias hilog='cd /arc/msglogs/; ls -lt'
+alias logdir='cd /log$SYS_DIR'
+alias l.db='tail -${tail_len}f $SYS_LOG/db.log|pst'
+alias l.dbu='tail -${tail_len}f $SYS_LOG/db.upd'
+alias l.exec='tail -${tail_len}f $SYS_LOG/exec.log | pst'
+alias l.hi='tail -${tail_len}f $SYS_LOG/hi.log | pst'
+alias l.op='tail -${tail_len}f $SYS_LOG/op.log | pst'
+alias l.proc='tail -${tail_len}f $SYS_LOG/proc.log | pst'
+alias l.rd='tail -${tail_len}f $SYS_LOG/rd.log | pst'
+alias l.sy='tail -${tail_len}f $SYS_LOG/sy.log | pst'
+alias l.td='tail -${tail_len} $SYS_LOG/td.log | pst'
+alias irecv='cd $SYS_ARC/msglogs/IRECVLOG; echo; lh; echo;'
+alias sasprocs="/bin/ps -ef | head -1; /bin/ps -ef | /bin/grep /obj/..oi | /bin/sed /grep/d | /usr/bin/tee /tmp/oikill | /bin/awk '{print $2}'"
+
+alias ldlib='echo; echo "   LD_LIBRARY_PATH=`echo $LD_LIBRARY_PATH`"; echo'
+alias showld=ld_lib
+
+# Perform a DB Rebuild
+alias rbld="$SYS_DIR/ct/obj/ctrbld $SYS_DIR/db/dat/pfile*.p"
+
+
+#
+# Re-Set Aliases
+#
+alias autoload='typeset -fu'
+alias integer='typeset -i | more'
+alias local='typeset | more'
+alias rmcore='/usr/xpg4/bin/rm ./core'
+
+alias pylib='cd /home/apps/python-lib/lib/python1.5'
+
+alias setl='export TERM=linkmc'
+alias setx='export TERM=xterm-256color'
+alias setsas='export TERM=sascrt'
+alias setsym='export TERM=sassym; echo "SASSYM = 30 x 15";'
+alias setvt='export TERM=vt100'
+
+alias seeterms='cd /usr/share/lib/terminfo'
+alias lnz='la | grep -v "   0 "' # lnonzero
+alias lz='la | grep    "   0 "'
+alias lhnz='lnz | head'
+alias  bysize=' sort -k +5 -n '  # +2=byowner
+alias ttl=" paste -sd+ | bc "
+alias ausers='grep -v "^#" /etc/passwd | cut -f1 -d ":" | sort'
+alias files='grep "^\-" | cut -c55-'
+alias txtfiles='file * | egrep "text|script"'
+alias to_compile='cut -f1 -d ":" | sort -u | cut -f5 -d "/" | cut -f1 -d "."'
+
+alias find_uniq='cut -f1 -d ":" | uniq' 
+
+alias cvs.files="cvs -Q status | grep ^File | cut -f2 -d ":" | cut -f2 -d ' ' "
+alias cvs.mod='cvs -Q status | grep ^File | grep -v "Up-to-date" | grep -v " no file " '
+alias cvs.new='cvs -Q status | grep ^File | grep " no file "'
+alias cvs.new='cvs status `lt | files` | grep ^File | grep " no file "'
+
+alias cvs.mod2='cvs.mod | cut -f2 -d ":" | cut -f2 -d " " | xargs ls -lt'
+
+# alias cvs.diff="cvs diff | egrep ^diff | awk '{print $3}'"
+alias cvs.diff="cvs -Q diff | egrep ^diff | awk '{print \$3}'"
+alias abc="awk '{print \$3}'"
+alias findnumfiles="find . -type f -size 0 -name \"[0-9]*\" | egrep \"[0-9]$\""
+alias listnumfiles="findnumfiles | xargs ls -ldt  \;"
+alias rmnumfiles="findnumfiles | xargs  rm -i  \; "
+alias list_tildes="ls -lt | grep \~"
+
+alias wg2="$SYS_DIR/ut/shs/wwwgrephp2"
+
+# pipe the output of a 'srcgrep' into prod_src to eliminate 'scratch' files
+alias prod_src='egrep "\/[a-z]+\.c\:"'
+
+alias tarshow='tar tvf '
+# . ~/.functions
+
+alias pylib='cd /home/apps/python-lib/lib/python1.5'
+alias sitepy='cd /home/apps/python-site'
+alias mylisp='cd ~/site-lisp; lt my*.el'
+alias lisp='cd ~/lisp; echo "       Directories"; dir;echo "       Recent Files"; lt *.el | head'
+
+# High Availability - Failover
+alias failover='cd /opt/VRTSvcs/avnet_scripts/; lt *.sh; echo; lt *.log'
+
+alias resrc='. ~/.profile'
+alias xyz='cut -c 55-'
+
+alias atlist='at -l | cut -f1'
+
+
+phx_mod_pattern='[^\._]+\.'
+phx_src="${phx_mod_pattern}."
+phx_dat="${phx_mod_pattern}dat"
+phx_scr="${phx_mod_pattern}scr"
+alias dat2='egrep " ${phx_dat}$| ${phx_scr}$"'
+alias trythis='egrep " ${phx_mod_pattern}.$"'
+alias valid_src='egrep  "^${phx_mod_pattern}[chmv]"'
+alias vfiles1=' egrep "^[^\.\_\/]+\.[chmv][^a-zA-Z0-9\.]" '
+alias vfiles2=' egrep  " [^\.\_\/]+\.[chmv]$" '
+alias vfiles3=' egrep  "[^\.\_\/]+\.[chmv][^a-zA-Z0-9]" '
+
+#alias lhs='ls -lAt | egrep " [a-z0-9]{6,}\.[ch]$" | head'
+alias lhs='lts | head '
+alias fonts='xlsfonts | more'
+alias listgzip='gzip -l '
+alias listtar='tar tvf '
+
+
+
+goto()
+{
+   cd `whatdir $1`
+}
+
+which2()
+{
+   which $1 | xargs ls -ldt
+}
+
+#alias ruler='echo ...................................................................................................1...................................................................................................2; echo .........1.........2.........3.........4.........5.........6.........7.........8.........9.........0.........1.........2.........3.........4.........5.........6.........7.........8.........9.........0; echo 12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890'
+
+#  80 positions
+alias ruler8='echo .........1.........2.........3.........4.........5.........6.........7.........8;
+             echo 12345678901234567890123456789012345678901234567890123456789012345678901234567890;'
+
+# 160 positions
+alias ruler='echo ...................................................................................................1............................................................;
+             echo .........1.........2.........3.........4.........5.........6.........7.........8.........9.........0.........1.........2.........3.........4.........5.........6;
+             echo 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890;'
+
+# 200 positions
+alias ruler2='echo ...................................................................................................1...................................................................................................2; 
+              echo .........1.........2.........3.........4.........5.........6.........7.........8.........9.........0.........1.........2.........3.........4.........5.........6.........7.........8.........9.........0; 
+              echo 12345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890'
+
+
+alias ruler22='echo ...................................................................................................1.................................................................; 
+               echo .........1.........2.........3.........4.........5.........6.........7.........8.........9.........0.........1.........2.........3.........4.........5.........6.....; 
+               echo 123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345'
+
+# 270-postions
+alias ruler222='echo ...................................................................................................1...................................................................................................2......................................................................;
+                echo .........1.........2.........3.........4.........5.........6.........7.........8.........9.........0.........1.........2.........3.........4.........5.........6.........7.........8.........9.........0.........1.........2.........3.........4.........5.........6.........7;
+                echo 123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890'
+
+alias rule='printf "12345678\n12345"'
+
+lfind() 
+{
+    # Do a long listing of all files found
+    find . -name $1 -exec ls -ldt {} \;
+}
+
+
+
+
+alias nondb='cd $SYS_PRI; ls -lt | grep -v DBF | grep -v IDX'
+alias gopri='cd $SYS_PRI'
+alias goarc='cd /arc/log/box'
+alias goarc2='cd /arc/log/tmp'
+alias pids='echo; echo "$SYS_DIR/td/pid/"; lt $SYS_DIR/td/pid; echo;dp tout; echo'
+cl1003='cd $SYS_DIR/hi/src; clib hifninms; cl hicmrecv; cl hiutrcv; cl hioihmg;'
+
+alias rs='set noglob; eval `resize`'
+
+
+alias mlast='last -100 | grep -iv sas | more' 
+
+
+# SUDO - Avnet
+# alias chgcore='sudo /bin/chmod 777 /cores/*.core'
+# alias tailvarlog='sudo /usr/bin/tail -f /var/log/messages'
+# alias start_asrs='sudo $SYS_DIR/ut/asrs'
+# alias rebuild_db='sudo $SYS_DIR/ct/obj/rebuild_db.sh'
+# alias debug='sudo /usr/local/bin/gdb'
+# alias edit_this='sudo /usr/local/emacs-20.2'
+# alias see_cron='sudo /usr/bin/cat /var/spool/cron/crontabs/root'
+# alias file2='sudo /usr/bin/file core'
+# alias run_hppi='sudo /usr/bin/hppi'
+## Saved Xterms
+# alias greenscreen='xterm -bg black -fg green -cr white -ls -geometry 80x25+0+0 &'
+
+## Saved Xterms
+# . /home/jfierke/.xterm
+# alias xterms='echo; cut -f2 -d" " .xterm | cut -f1 -d"="'
+
+# alias showx='cut -c7- .xterm | cut -f1 -d='
+# alias hidat='cat $SYS_DIR/hi/dat/hi_state.dat'
+
+alias mkref='touch -t `date +"%Y%m%d0000"` ref.txt'
+# alias samba='cd /usr/local/samba; ls -lt; cd lib; ls -lt;'
+
+# alias make_easy='cd $SYS_DIR/sy/src/; cp syinpath.m syinpath.uneasy.bak.m; cp syinpath.easy.m syinpath.m; export EASY="EASY"; cd -;'
+# alias uneasy='cd $SYS_DIR/sy/src/; cp syinpath.uneasy.m syinpath.m; export EASY=""; cd -;'
+
+# alias mxj='echo "You wanted me to tell you when it finished...well, duh!" | mailx -s "Come and Get It" john.fierke@avnet.com,2147323391@messaging.sprintpcs.com'
+
+# alias smbreset="/usr/local/samba/bin/smbpasswd -U 013042"
+
+
+alias yumlist='yum list'
+alias rpmlist='rpm -qa'
+# alias myip='nslookup usrch03nba13042.avnet.com'
+
+
+#
+#  SAP 
+#
+alias isap='cd /arc/msglogs/isaplog/'
+alias osap='cd /arc/msglogs/osaplog/'
+alias tisap='tail -30f /log/phx/hi_isap.log'
+alias tosap='tail -30f /log/phx/hi_osap.log'
+alias visap='function _visap() { if [ "$1" = "" ]; then vi /log/phx/hi_isap.log; else vi /arc/msglogs/isaplog/$1; fi }; _visap'
+alias vosap='function _vosap() { if [ "$1" = "" ]; then vi /log/phx/hi_osap.log; else vi /arc/msglogs/osaplog/$1; fi }; _vosap'
+alias gisap='function _gisap(){ if [ $# == 2 ]; then grep $1 /arc/msglogs/isaplog/$2; else grep $1 /log/phx/hi_isap.log; fi; }; _gisap'
+alias gosap='function _gosap(){ if [ $# == 2 ]; then grep $1 /arc/msglogs/osaplog/$2; else grep $1 /log/phx/hi_osap.log; fi; }; _gosap'
+
+# Search for "/pri/sap" message headers
+alias lisap='grep ^\/pri\/sap /log/phx/hi_isap.log'
+alias losap='grep ^\/pri\/sap /log/phx/hi_osap.log'
+alias lisapc='lisap | cut -c10-11 | sort | uniq -c'
+alias losapc='losap | cut -c10-11 | sort | uniq -c'
+alias lisap2='function _lisap2(){ grep ^\/pri\/sap /arc/msglogs/isaplog/$1; }; _lisap2' 
+alias losap2='function _losap(){ grep ^\/pri\/sap /arc/msglogs/osaplog/$1; }; _losap'
+alias lisap2c='function _lisap2c(){ grep ^\/pri\/sap /arc/msglogs/isaplog/$1 | cut -c10-11 | sort | uniq -c; }; _lisap2c'
+alias losap2c='function _losap(){ grep ^\/pri\/sap /arc/msglogs/osaplog/$1 | cut -c10-11 | sort | uniq -c; }; _losap'
+
+alias gstk='function _gstk() { egrep "(^/pri/sap/OP\.|ZLOIPRO01>|EDI_DC40>|DOCNUM|  <SERIAL|E1AFKOL|AUFNR|BMENGE|ZE1AFKOL|REFNR|ZSPLT_IND|Z1QTC121_ORD|BATCH|AOG|<E1JSTKL|STAT>E|<E1RESBL|POSTP|POSNR|BDMNG|MEINS|MATNR|CHARG|E1AFPOL|PSMNG|KDAUF|KDPOS|RSPOS)" $1 | egrep -v "^</"; }; _gstk'
+alias gstk2='function _gstk2() { egrep "(^/pri/sap/OP\.|<ZLOIPRO01>|<EDI_DC40>|<DOCNUM|  <SERIAL|<E1AFKOL|<AUFNR|<BMENGE|<ZE1AFKOL|<REFNR|<ZSPLT_IND|<Z1QTC121_ORD|<BATCH|STAT>E|<E1RESBL|<POSTP|<POSNR|<BDMNG|<CHARG|<E1AFPOL)" $1 | egrep -v "^</"; }; _gstk2'
+alias poupd='function _poupd() { grep "<ACTION>002" ${1:-/log/phx/hi_isap.log} -B 20 | grep "<BELNR>";  }; _poupd'
+alias podel='function _podel() { grep "<ACTION>003" ${1:-/log/phx/hi_isap.log} -B 20 | grep "<BELNR>";  }; _podel'
+
+alias dbup='cd /arc/msglogs/dbuplog/'
+
+
+# Hager-Specific (create separate .aliases-hager file)
+
+# INBOUND
+alias gitm='function _gitm() { glog update_itm hi; }; _gitm'
+alias gitm_each_uom='function _gitm_each_uom() { glog update_itm_each_uom hi; }; _gitm_each_uom'
+alias gitm_case_uom='function _gitm_case_uom() { glog update_itm_case_uom hi; }; _gitm_case_uom'
+alias gpoh='function _gpoh() { glog update_poh hi; }; _gpoh'
+alias gpod='function _gpod() { glog update_pod hi; }; _gpod'
+alias gpcm='function _gpcm() { glog update_pcm hi; }; _gpcm'
+alias groh='function _groh() { glog update_roh hi; }; _groh'
+alias grod='function _grod() { glog update_rod hi; }; _grod'
+alias gsoh='function _gsoh() { glog update_soh hi; }; _gsoh'
+alias gsod='function _gsod() { glog update_sod hi; }; _gsod'
+alias gsch='function _gsch() { glog update_sch hi; }; _gsch'
+alias gscd='function _gscd() { glog update_scd hi; }; _gscd'
+alias gtrk='function _gtrk() { glog update_trk hi; }; _gtrk'
+alias gpoh='function _gpoh() { glog update_poh hi; }; _gpoh'
+
+# Count Inbound Message Types
+alias count_inbound='
+function _count_inbound() { 
+for f in itm itm_case_uom item_each_uom pcm poh pod roh rod soh sod sch scd trk; 
+do   
+   echo ">> $f";
+   glog update_${f} hi | wc -l;
+   if [ "$f" = "roh" -o "$f" = "poh" -o "$f" = "soh" ];
+   then
+     glog update_${f} hi | grep -wEo "(I|P|S|T)" | sort | uniq -c;
+   fi;
+done; 
+}; _count_inbound'
+
+alias count_inbound2='
+function _count_inbound2() { 
+for f in itm itm_case_uom item_each_uom pcm poh pod roh rod soh sod sch scd trk; 
+do   
+   cnt=0
+   cnt=$(glog update_${f} hi | wc -l);
+   echo "$f :     $cnt";
+   if [ "$f" = "roh" -o "$f" = "poh" -o "$f" = "soh" ];
+   then
+     glog update_${f} hi | grep -wEo "(I|P|S|T)" | sort | uniq -c;
+   fi;
+done; 
+}; _count_inbound2'
+
+# OUTBOUND
+# Inventory Adjustment (C_UPCNF)
+function b2gac() { 
+   glog recptr himsg | grep -w AC | cut -c1-160 | grep -w AC
+}
+# Ship Comlete Container (C_UPCNF)
+alias b2gcc='function _b2gcc() { glog recptr himsg | grep -w CC | cut -c1-180 | grep -w CC; }; _b2gcc'
+# Induct Accept (C_BWUMMF)  
+alias b2gia='function _b2gia() { glog recptr himsg | grep -w IA | cut -c1-180 | grep -w IA; }; _b2gia'
+# Inventory Hold (C_BULLF)
+alias b2gih='function _b2gih() { glog recptr himsg | grep -w IH | cut -c1-180 | grep -w IH; }; _b2gih'
+# Inventory Release Hold (C_BWULLF)
+alias b2gir='function _b2gir() { glog recptr himsg | grep -w IR | cut -c1-180 | grep -w IR; }; _b2gir'
+# Pre-Receive Inspect FAIL (C_BWUINF)
+alias b2gpf='function _b2gpf() { glog recptr himsg | grep -w PF | cut -c1-180 | grep -w PF; }; _b2gpf'
+# Pre-Receive Inspect PASS (C_BWUINF)
+alias b2gpp='function _b2gpp() { glog recptr himsg | grep -w PP | cut -c1-180 | grep -w PP; }; _b2gpp'
+# Receipt Complete (C_UPCNF)
+alias b2grc='function _b2grc() { glog recptr himsg | grep -w RC | cut -c1-180 | grep -w RC; }; _b2grc'
+# Induct Reject (C_BWULLF)
+alias b2grj='function _b2grj() { glog recptr himsg | grep -w RJ | cut -c1-180 | grep -w RJ; }; _b2grj'
+# Ship Complete Line (C_UPCNF)
+alias b2gsc='function _b2gsc() { glog recptr himsg | grep -w SC | cut -c1-180 | grep -w SC; }; _b2gsc'
+# IDATA_ITEMS
+alias b2gsi='function _b2gsi() { glog recptr himsg | grep -w SI | cut -c1-180 | grep -w SI; }; _b2gsi'
+# IDATA_PACKAGES
+alias b2gsp='function _b2gsp() { glog recptr himsg | grep -w SP | cut -c1-180 | grep -w SP; }; _b2gsp'
+# IDATA_SHIPMENTS
+alias b2gss='function _b2gss() { glog recptr himsg | grep -w SS | cut -c1-180 | grep -w SS; }; _b2gss'
+# Ship Complete Trailer (C_UPCNF)
+alias b2gst='function _b2gst() { glog recptr himsg | grep -w ST | cut -c1-180 | grep -w ST; }; _b2gst'
+
+export -f b2gac
+
+function count_outbound() {
+   for f in ac cc ia ih ir pf pp rc rj sc si sp ss st; 
+   do
+     cnt=$(eval ${BASH_ALIASES[b2g${f}]} | wc -l)
+     echo "${f^^} : $cnt"
+   done
+}
+
+# Search logs for mention of Failures
+# alias gfail='for l in hi sy himsg; do   for f in FAIL fail Fail;   do     echo $l : $f;     glog $f $l | grep $f;   done; done '
+# alias gfail2='for f in FAIL fail Fail;    do     echo $f;   glog $f all -i;    done;'
+
+alias gfail='function _gfail() { if [[ "$1" = "all" ]]; then logfile=*; else logfile=${1:-sy}; fi; str="fail|prob|error|bad|unable|missing|invalid"; glog "($str)" $logfile -iE | grep -viE "(xml|prfail)" | grep -iE "($str)"; }; _gfail'
+alias afail='function _afail() { if [[ "$1" = "all" ]]; then logfile=*; else logfile=${1:-sy}; fi; str="fail|prob|error|bad|unable|missing|invalid"; alog "($str)" $logfile -iE | grep -viE "(xml|prfail)" | grep -iE "($str)"; }; _afail'
+
+# alias afail='str="fail|prob|error|bad|unable|missing|invalid"; alog "($str)" ${1:-sy} -iE | grep -viE "(xml|prfail)" | grep -iE "($str)" '
+
+# Search for G2 Error Status
+alias g2e='glog newsts hi | grep -w E'
+function g2ed() { IFS=$'\n'; for f in $(g2e  | cut -c83-); do  echo "[$f]";    done; }
+alias a2e='alog newsts hi | grep -w E'
+# ...   ...     RETRY Status
+alias g2r='glog newsts hi | grep -w R'
+alias a2r='alog newsts hi | grep -w R'
+
+
+alias list_func='function _list_func(){ grep ^int $2 $1 | grep "(" | cut -f1 -d"(" | cut -f2 -d" "; }; _list_func'
+
+
+#
+# File System
+#
+# Show most frequent commands
+function cmdusage() { history | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl |  head -n20; }
+
+
+#
+# SVN
+#
+function svs() { svn -u status $1 | grep -v ^?; }
+
+# alias svs='function _svs() { svn -u status $1 | grep -v ^?; }; _svs'
+alias svsb='svs /$SYSDIR/'
+alias svsw='svs /www/$SYSDIR'
+alias svl='function _svl() { svn log $1 | head -${2:-20};  }; _svl'
+alias svd='function _svd() { svn diff -x -w $1 | colordiff; }; _svd'
+# Get diff between BASE and HEAD
+alias svdh='function _svdh() { svn diff -r BASE:HEAD $1 | colordiff; }; _svdh'
+alias sdiff='function _sdiff() { dr=$(dirname `find /box/ -name $2 2>/dev/null`); fullpath=$dr/$2; echo; echo :: DIFF $fullpath;  echo :: EVL-${1^^} vs. LOCAL; echo ; echo EVL-${1^^}; ssh evlasrs$1 "ls -ldt --color $dr/$2"; echo LOCAL; ls -ldt --color $dr/$2; echo; read -p "[DIFF?]"; echo;ssh evlasrs$1 "cat $dr/$2" | diff -w -u $3 - $dr/$2; }; _sdiff'
+
+
+alias bgrep2='function _bgrep2(){ grep $3 -B 1 $1 $2 | grep -v "^\-"; }; _bgrep2'
+alias  bgrep='function _bgrep(){ grep $3 -B 1 $1 $2 | grep -v "^\-" | pst | grep $1; }; _bgrep'
+alias  agrep='function _agrep(){ grep $3 -A 1 $1 $2 | grep -v "^\-" | pst | grep $1; }; _agrep'
+
+#
+# Log Aliases and Functions
+#
+#  Tail
+#
+
+# pst : Pastes 2 ( - - ) lines together
+alias pst='paste -d " " - -'
+# pst2 : Same as pst but also removes "--" separator that can be produced by a multi-file grep
+alias pst2='grep -vE "^\-\-$" | paste -d " " - -'
+# tlfp [LOGFILE] : similar to tlf but joins 2-line log entry into 1 line
+alias tlfp='function _tlfp() { logfile=${1:-sy}; tail -${2:-60}f /log$SYS_DIR/$logfile.log | pst;  }; _tlfp'
+# glog STRING [LOGFILE] : Search any of the BW system log files (2nd entry only)
+alias glog='function _glog() { if [ $# -lt 1 ]; then printf "USAGE:\n   glog STRING [logPrefix|all] [grepOptions]\n"; return 99; fi; tmp=${2:-sy}; if [ ${tmp,,} = "all" ]; then logfile=*; else logfile=${tmp}; fi; str=$1; grep -B1 $3 "$str" /log$SYS_DIR/$logfile.log | pst2 | grep $3 "$str"; }; _glog'
+alias alog='function _alog() { if [ $# -lt 1 ]; then printf "USAGE:\n   alog STRING [logPrefix|all]\n"; return 99; fi; tmp=${2:-sy}; if [ ${tmp,,} = "all" ]; then logfile=*; else logfile=${tmp}; fi; str=$1; grep -B1 $3 "$str" /arc/log/tmp/$logfile.log | pst2 | grep $3 "$str"; }; _alog'
+
+# These allow you to search for text in the 1st line of a log entry (function names, calling file, etc) 
+alias glog2='function _glog2() { if [ $# -lt 1 ]; then printf "USAGE:\n   glog2 STRING [logPrefix|all]\n"; return 99; fi; prefix=${2:-sy}; if [ ${prefix,,} = "all" ]; then logfile=*; else logfile=${prefix}; fi; str=$1; grep -A1 "$str" /log$SYS_DIR/$logfile.log | pst2 | grep $3 "$str"; }; _glog2'
+alias alog2='function _alog2() { if [ $# -lt 1 ]; then printf "USAGE:\n   alog2 STRING [logPrefix|all]\n"; return 99; fi; prefix=${2:-sy}; if [ ${prefix,,} = "all" ]; then logfile=*; else logfile=${prefix}; fi; str=$1; grep -A1 "$str" /arc/log/tmp/$logfile.log | pst2 | grep $3 "$str"; }; _alog2'
+
+
+
+# glogt [HH:MM:SS:MS] [LOGFILE]: Search any of the BW system log files by timestamp - only provide the time you need to match (12: or 12:32 or 12:32:01)
+alias glogt='function _glogt() { if [ $# -lt 1 ]; then printf "USAGE:\n   glogt H[H:MM:SS.ms] [logPrefix|all]\n"; return 99; fi; if [ ${2,,} = "all" ]; then logfile=*; else logfile=${2:-sy}; fi; timestr=$(date "+%Y/%m/%d $1"); grep -A1 "$timestr" /log/box/$logfile.log | pst2 | grep "$timestr" ; }; _glogt'
+
+alias alogt='function _alogt() { if [ $# -lt 1 ]; then printf "USAGE:\n   alogt H[H:MM:SS.ms] [logPrefix|all]\n"; return 99; fi; if [ ${2,,} = "all" ]; then logfile=*; else logfile=${2:-sy}; fi; timestr=$1; grep -A1 "..../../.. $timestr" /arc/log/tmp/$logfile.log | pst2 | grep "$timestr" ; }; _alogt'
+
+alias tlog='function _tlog() { lines=${2:-40}; if [ $# -lt 1 ]; then printf "USAGE:\n    tlog logPrefix [LINES] \nEXAMPLE:\n    tlog op [10] (will tail the last 10 lines of op.log file)\n"; else tail -${lines}f /log$SYS_DIR/$1.log | pst; fi;}; _tlog'
+
+#
+#  Grep (ie. glog td cron -i = grep -i -B 1 cron /phx/log/td.log | pst  >>>  many: "2018/04/04 02:20:00.93  <139  > /phx/td/obj/tdsutask - tdsutask.c [1529]        CRON EXECUTION [07, B27]"
+#
+#
+
+
+alias by_inv_date='sort -n  -k1.135,1.148'
+alias ctsetvar='grep -oP "(?<=<CTSET ).*?(?=\=.*)" '
+
+
+
+# a2b : SCP a file from host1 to host2 without being on either host
+alias a2b='function _a2b() { what=$1; what_dir=`dirname $what`; from_host=$2; to_host=$3; to_dir=${4:-$what_dir}; cmd="scp -3 -v johnf@$from_host:$what johnf@$to_host:$to_dir"; ays "$cmd"; if [ $? -eq 0 ]; then echo SKIPPING;return 0; else $cmd; return 1; fi ; }; _a2b '
+
+# ays : output a message and accept 'y' and non-'y' response
+alias ays='function _ays() { IFS= read -ep "$1? "; if [ ${REPLY,,} = "y" -o ${REPLY,,} = "yes" ]; then return 1; else return 0; fi; }; _ays'
+
+
+function colorgrid( )
+{
+    iter=16
+    while [ $iter -lt 52 ]
+    do
+        second=$[$iter+36]
+        third=$[$second+36]
+        four=$[$third+36]
+        five=$[$four+36]
+        six=$[$five+36]
+        seven=$[$six+36]
+        if [ $seven -gt 250 ];then seven=$[$seven-251]; fi
+
+        echo -en "\033[38;5;$(echo $iter)m█ "
+        printf "%03d" $iter
+        echo -en "   \033[38;5;$(echo $second)m█ "
+        printf "%03d" $second
+        echo -en "   \033[38;5;$(echo $third)m█ "
+        printf "%03d" $third
+        echo -en "   \033[38;5;$(echo $four)m█ "
+        printf "%03d" $four
+        echo -en "   \033[38;5;$(echo $five)m█ "
+        printf "%03d" $five
+        echo -en "   \033[38;5;$(echo $six)m█ "
+        printf "%03d" $six
+        echo -en "   \033[38;5;$(echo $seven)m█ "
+        printf "%03d" $seven
+
+        iter=$[$iter+1]
+        printf '\r\n'
+    done
+}
+
+alias makey='function _make() { echo "Hello"; pathpat="(/[^/]*)+:[0-9]+";ccred=$(echo -e "\033[0;31m");ccyellow=$(echo -e "\033[0;33m");ccend=$(echo -e "\033[0m"); /bin/make "$@" 2>&1 | sed -E -e "/[Ee]rror[: ]/ s%$pathpat%$ccred&$ccend%g" -e "/[Ww]arning[: ]/ s%$pathpat%$ccyellow&$ccend%g"; }; _make'
+alias makex='function _makex()
+{
+echo "[$@]"
+  pathpat="(/[^/]*)+:[0-9]+"
+  pathpat="^.*:[0-9]+"
+  ccred=$(echo -e "\037[0;31m")
+  ccyellow=$(echo -e "\033[0;33m")
+  ccend=$(echo -e "\037[0m")
+  /bin/make "$@" 2>&1 | sed -E -e "/[Ee]rror[: ]/ s%$pathpat%$ccred&$ccend%g" -e "/[Ww]arning[: ]/ s%$pathpat%$ccyellow&$ccend%g"
+  return ${PIPESTATUS[0]}
+}; _makex
+'

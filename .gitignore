@@ -1,0 +1,20 @@
+*
+!*/
+!/.vimrc
+!/site-lisp/**
+/site-lisp/*.elc
+!/.emacs.d/**
+!/.gitignore
+!/.vimrc
+!/.bash_profile
+!/.bashrc
+!/.bash_aliases
+!/.aliases_mw
+!/.abbrev_defs
+!/.profile
+!/sg2
+# !/home/jwfbw/colordiff
+# !/home/jwfbw/.txtcolors
+# !/home/jwfbw/defgrep
+*.elc
+*~
